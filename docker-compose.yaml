@@ -12,6 +12,8 @@ services:
       - .env
     networks:
       - goedge
+    command:
+      - '--skip-log-bin'
     volumes:
       - ./data/db/mysql:/var/lib/mysql:rw
     restart: always
@@ -27,6 +29,8 @@ services:
     networks:
       - goedge
     volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - ./data/edge-admin/configs:/usr/local/goedge/edge-admin/configs
       - ./data/edge-api/configs:/usr/local/goedge/edge-admin/edge-api/configs
     restart: always
@@ -46,6 +50,8 @@ services:
     cap_add:
       - NET_ADMIN
     volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - ./data/edge-node/cache:/opt/cache
       - ./data/edge-node/configs:/usr/local/goedge/edge-node/configs
     restart: always
